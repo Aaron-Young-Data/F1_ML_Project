@@ -5,7 +5,7 @@ import pandas as pd
 
 class CleanData:
     def __init__(self):
-        fastf1.Cache.enable_cache('data/Cache')
+        fastf1.Cache.enable_cache('Cache')
 
     def fastest_laps(self, session_data):
         # returns the fastest laps from given session object
@@ -14,9 +14,14 @@ class CleanData:
             session_data.load()
         except AttributeError:
             raise Exception('session_data is not a session object')
+        except KeyError:
+            return pd.DataFrame()
 
         list_fastest_laps = list()
-        drivers = pd.unique(session_data.laps['Driver'])
+        try:
+            drivers = pd.unique(session_data.laps['Driver'])
+        except fastf1.core.DataNotLoadedError:
+            return pd.DataFrame()
         for drv in drivers:
             drvs_fastest_lap = session_data.laps.pick_driver(drv).pick_fastest()
             list_fastest_laps.append(drvs_fastest_lap)
