@@ -1,12 +1,11 @@
 import pandas as pd
 
-from collect_data import GetData
-from data_cleaning import CleanData
+from collect_data import GetData, CleanData
 
 data = GetData()
 clean = CleanData()
 
-year_list = [2018, 2019, 2020, 2021, 2022, 2023]
+year_list = [2018, 2019, 2020, 2021, 2022, 2023, 2024]
 full_calender = pd.DataFrame()
 
 for year in year_list:
