@@ -5,7 +5,7 @@ import pandas as pd
 
 class GetData:
     def __init__(self):
-        fastf1.Cache.enable_cache('Cache')
+        fastf1.Cache.enable_cache('data/Cache')
 
     def get_calender(self, year: int, testing=False):
         # returns the information for the schedule (Location, Date, Format, Session(s))
@@ -22,7 +22,7 @@ class GetData:
                              'Session4',
                              'Session5']]
 
-    def session_data(self, year: int, location: str, session=None):
+    def session_data(self, year: int, location: str, session: str):
         session_data = fastf1.get_session(year=year, gp=location, identifier=session)
         return session_data
 
@@ -60,7 +60,7 @@ class GetData:
 
 class CleanData:
     def __init__(self):
-        fastf1.Cache.enable_cache('Cache')
+        fastf1.Cache.enable_cache('data/Cache')
 
     def order_laps_delta(self, laps: pd.DataFrame, include_pos=True):
         # Order dataframe by laptime column
